@@ -90,7 +90,7 @@ document.addEventListener('click',e=>{const t=e.target;
     (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>alert('Copied! Paste it to Grok Bot.'),()=>prompt('Copy this and send it to Grok Bot:',txt));return}
 });
 addEventListener('online',render);addEventListener('offline',render);
-const APP_VERSION='v4';
+const APP_VERSION='v5';
 if('serviceWorker' in navigator){
   const had=!!navigator.serviceWorker.controller;let reloaded=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!reloaded){reloaded=true;location.reload()}});

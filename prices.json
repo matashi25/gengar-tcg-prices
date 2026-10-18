@@ -127,6 +127,28 @@
       "ebay": null,
       "jihuanshe": null,
       "fetched_at": "2026-10-18T14:14:37Z"
+    },
+    {
+      "id": "cn-gem5-107",
+      "name": "Captain Pikachu",
+      "set": "Pokemon Chinese Gem Pack 5",
+      "number": "107",
+      "language": "CN",
+      "url": "https://www.pricecharting.com/game/pokemon-chinese-gem-pack-5/captain-pikachu-107",
+      "image": null,
+      "history": null,
+      "prices_usd": {
+        "ungraded": 206.87,
+        "grade_7": null,
+        "grade_8": 177.5,
+        "grade_9": 212.5,
+        "grade_9_5": 407.0,
+        "psa_10": 415.0
+      },
+      "ebay": null,
+      "jihuanshe": null,
+      "fetched_at": "2026-10-18T16:30:00Z",
+      "note": "manual entry (box blocked); image/history on next successful refresh"
     }
   ]
 }
