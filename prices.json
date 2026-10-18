@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-18T13:40:51Z",
+  "updated_at": "2026-10-18T13:54:43Z",
   "source": "PriceCharting",
   "cards": [
     {
@@ -20,7 +20,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-10-18T13:40:47Z"
+      "fetched_at": "2026-10-18T13:54:39Z"
     },
     {
       "id": "en-151-199",
@@ -40,7 +40,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-10-18T13:40:47Z"
+      "fetched_at": "2026-10-18T13:54:40Z"
     },
     {
       "id": "en-151-200",
@@ -60,7 +60,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-10-18T13:40:48Z"
+      "fetched_at": "2026-10-18T13:54:41Z"
     },
     {
       "id": "jp-sv2a-200",
@@ -80,7 +80,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-10-18T13:40:49Z"
+      "fetched_at": "2026-10-18T13:54:41Z"
     },
     {
       "id": "jp-sv2a-201",
@@ -100,7 +100,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-10-18T13:40:50Z"
+      "fetched_at": "2026-10-18T13:54:42Z"
     },
     {
       "id": "jp-sv2a-202",
@@ -120,7 +120,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-10-18T13:40:51Z"
+      "fetched_at": "2026-10-18T13:54:43Z"
     }
   ]
 }

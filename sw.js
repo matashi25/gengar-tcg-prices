@@ -1,4 +1,4 @@
-const V='tcg-v1';
+const V='tcg-v2';
 const SHELL=['./','index.html','app.js','manifest.webmanifest','icon.svg','icon-180.png','icon-192.png','icon-512.png','prices.json',
 'img/en-151-198.jpg','img/en-151-199.jpg','img/en-151-200.jpg','img/jp-sv2a-200.jpg','img/jp-sv2a-201.jpg','img/jp-sv2a-202.jpg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)));self.skipWaiting()});
