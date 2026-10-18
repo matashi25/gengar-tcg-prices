@@ -1,5 +1,5 @@
-const V='tcg-v6';
-const SHELL=['./','index.html','app.js','manifest.webmanifest','icon.svg','icon-180.png','icon-192.png','icon-512.png','prices.json'];
+const V='tcg-v7';
+const SHELL=['./','index.html','app.js','manifest.webmanifest','icon.svg','icon-180.png','icon-192.png','icon-512.png','prices.json','rates.json'];
 async function precache(){const c=await caches.open(V);
   await Promise.all(SHELL.map(u=>fetch(u,{cache:'no-store'}).then(r=>r.ok&&c.put(u,r)).catch(()=>{})));
   try{const d=await (await caches.match('prices.json')).json();

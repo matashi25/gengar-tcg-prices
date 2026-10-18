@@ -41,10 +41,18 @@ h2{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em
 .chips button{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--mut);font-weight:700;font-size:13px}
 .chips button.on{color:#fff;background:#6d28d9;border-color:var(--glow);box-shadow:0 0 10px var(--glow)}
 #fset{flex:1;min-width:0;padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--txt);font-size:16px;-webkit-appearance:none;appearance:none;background-image:linear-gradient(45deg,transparent 50%,#a855f7 50%),linear-gradient(135deg,#a855f7 50%,transparent 50%);background-position:calc(100% - 16px) 55%,calc(100% - 11px) 55%;background-size:5px 5px;background-repeat:no-repeat;padding-right:26px;text-overflow:ellipsis}
+.noimg{width:78px;height:108px;border-radius:6px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer}
+.own-b{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:6px;margin-left:4px;vertical-align:2px;color:#0d0820;background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,.6)}
+.sum{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;text-align:center;background:linear-gradient(135deg,#2b1660,#1a0f33);border:1px solid var(--line);border-radius:10px;padding:6px;font-size:13px}.sum small{display:block;color:var(--mut);font-size:10px}
+.tot.t4{grid-template-columns:repeat(4,1fr)}.tot.t4 b{font-size:14px}
+.ent{display:grid;grid-template-columns:1fr 1fr;gap:4px 8px;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:8px;margin-bottom:8px}.ent input,.ent select{margin:2px 0 4px}
+.ev{display:flex;flex-direction:column;justify-content:flex-end}.del{margin-top:4px;padding:7px;border-radius:9px;border:1px solid var(--eye);background:none;color:var(--eye);font-weight:600}
+#fcur{width:auto;padding:8px 10px;border-radius:999px;border:1px solid var(--glow);background:var(--card);color:#fff;font-size:16px;font-weight:700}
+.c{grid-template-columns:78px minmax(0,1fr)!important}.pr{grid-template-columns:repeat(3,minmax(0,1fr))!important}.sum,.tot.t4{grid-template-columns:repeat(4,minmax(0,1fr))!important}.c>div{min-width:0}.pr div{font-size:13px;overflow-wrap:anywhere}.sum{font-size:12px}.sum>div{min-width:0;overflow-wrap:anywhere}
 </style></head><body>
 <header><h1><img src="icon.svg" alt="">Gengar TCG Prices</h1><div class="upd" id="upd">Loading…</div>
-<nav><button id="t-own" class="on">Collection</button><button id="t-wish">Wish list</button></nav></header>
+</header>
 <main id="m"></main>
 <div id="ov"></div>
 <input type="file" id="imp" accept="application/json" hidden>
-<script src="app.js?v=6"></script></body></html>
+<script src="app.js?v=7"></script></body></html>
