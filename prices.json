@@ -1,0 +1,126 @@
+{
+  "updated_at": "2026-10-18T13:40:51Z",
+  "source": "PriceCharting",
+  "cards": [
+    {
+      "id": "en-151-198",
+      "name": "Venusaur ex",
+      "set": "Pokemon 151",
+      "number": "198/165",
+      "language": "EN",
+      "url": "https://www.pricecharting.com/game/pokemon-scarlet-&-violet-151/venusaur-ex-198",
+      "image": "img/en-151-198.jpg",
+      "prices_usd": {
+        "ungraded": 93.99,
+        "grade_7": 83.38,
+        "grade_8": 97.0,
+        "grade_9": 119.0,
+        "grade_9_5": 154.98,
+        "psa_10": 400.0
+      },
+      "ebay": null,
+      "jihuanshe": null,
+      "fetched_at": "2026-10-18T13:40:47Z"
+    },
+    {
+      "id": "en-151-199",
+      "name": "Charizard ex",
+      "set": "Pokemon 151",
+      "number": "199/165",
+      "language": "EN",
+      "url": "https://www.pricecharting.com/game/pokemon-scarlet-&-violet-151/charizard-ex-199",
+      "image": "img/en-151-199.jpg",
+      "prices_usd": {
+        "ungraded": 341.73,
+        "grade_7": 249.0,
+        "grade_8": 311.34,
+        "grade_9": 356.35,
+        "grade_9_5": 639.11,
+        "psa_10": 1385.0
+      },
+      "ebay": null,
+      "jihuanshe": null,
+      "fetched_at": "2026-10-18T13:40:47Z"
+    },
+    {
+      "id": "en-151-200",
+      "name": "Blastoise ex",
+      "set": "Pokemon 151",
+      "number": "200/165",
+      "language": "EN",
+      "url": "https://www.pricecharting.com/game/pokemon-scarlet-&-violet-151/blastoise-ex-200",
+      "image": "img/en-151-200.jpg",
+      "prices_usd": {
+        "ungraded": 115.0,
+        "grade_7": 104.75,
+        "grade_8": 116.59,
+        "grade_9": 135.96,
+        "grade_9_5": 201.25,
+        "psa_10": 511.41
+      },
+      "ebay": null,
+      "jihuanshe": null,
+      "fetched_at": "2026-10-18T13:40:48Z"
+    },
+    {
+      "id": "jp-sv2a-200",
+      "name": "Venusaur ex SAR",
+      "set": "Pokemon Card 151 (sv2a)",
+      "number": "200/165",
+      "language": "JP",
+      "url": "https://www.pricecharting.com/game/pokemon-japanese-scarlet-&-violet-151/venusaur-ex-200",
+      "image": "img/jp-sv2a-200.jpg",
+      "prices_usd": {
+        "ungraded": 108.72,
+        "grade_7": 67.69,
+        "grade_8": 105.0,
+        "grade_9": 117.52,
+        "grade_9_5": 129.0,
+        "psa_10": 171.0
+      },
+      "ebay": null,
+      "jihuanshe": null,
+      "fetched_at": "2026-10-18T13:40:49Z"
+    },
+    {
+      "id": "jp-sv2a-201",
+      "name": "Charizard ex SAR",
+      "set": "Pokemon Card 151 (sv2a)",
+      "number": "201/165",
+      "language": "JP",
+      "url": "https://www.pricecharting.com/game/pokemon-japanese-scarlet-&-violet-151/charizard-ex-201",
+      "image": "img/jp-sv2a-201.jpg",
+      "prices_usd": {
+        "ungraded": 333.01,
+        "grade_7": 301.22,
+        "grade_8": 337.0,
+        "grade_9": 371.0,
+        "grade_9_5": 408.0,
+        "psa_10": 522.54
+      },
+      "ebay": null,
+      "jihuanshe": null,
+      "fetched_at": "2026-10-18T13:40:50Z"
+    },
+    {
+      "id": "jp-sv2a-202",
+      "name": "Blastoise ex SAR",
+      "set": "Pokemon Card 151 (sv2a)",
+      "number": "202/165",
+      "language": "JP",
+      "url": "https://www.pricecharting.com/game/pokemon-japanese-scarlet-&-violet-151/blastoise-ex-202",
+      "image": "img/jp-sv2a-202.jpg",
+      "prices_usd": {
+        "ungraded": 125.5,
+        "grade_7": 48.0,
+        "grade_8": 60.56,
+        "grade_9": 113.5,
+        "grade_9_5": 125.01,
+        "psa_10": 194.84
+      },
+      "ebay": null,
+      "jihuanshe": null,
+      "fetched_at": "2026-10-18T13:40:51Z"
+    }
+  ]
+}
