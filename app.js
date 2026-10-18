@@ -1,11 +1,12 @@
 const KEY='tcg-user-v1',GR={ungraded:'Ungraded',grade_7:'Grade 7',grade_8:'Grade 8',grade_9:'Grade 9',grade_9_5:'Grade 9.5',psa_10:'PSA 10'};
-const CUR=['USD','CNY','JPY','HKD','SGD','MYR','EUR','GBP','AUD','CAD','KRW','TWD'],APP_VERSION='v8';
+const CUR=['USD','CNY','JPY','HKD','SGD','MYR','EUR','GBP','AUD','CAD','KRW','TWD'],APP_VERSION='v9';
 const TZ='America/Los_Angeles',dt=(t,o)=>new Date(t).toLocaleString('en-US',{timeZone:TZ,...o});
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let D={cards:[]},R={rates:{USD:1}},U=migrate(load());
-function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch{return{}}}
-function migrate(o){ // v1 {cards:{id:{status,grade,price,date}}} -> v2 {v:2,cards:{id:{entries:[]}}}
-  if(o.v===2)return o;const n={v:2,cards:{},pending:o.pending||[],settings:o.settings||{cur:'USD'}};
+function load(){try{const o=JSON.parse(localStorage.getItem(KEY));return o&&typeof o==='object'?o:{}}catch{return{}}}
+function migrate(o){try{return migrate0(o)}catch(e){console.error('migrate',e);try{localStorage.setItem(KEY+'-backup-'+Date.now(),JSON.stringify(o))}catch{}return{v:2,cards:{},pending:[],settings:{cur:'USD'}}}}
+function migrate0(o){o=o||{}; // v1 {cards:{id:{status,grade,price,date}}} -> v2 {v:2,cards:{id:{entries:[]}}}
+  if(o.v===2){o.cards=o.cards&&typeof o.cards==='object'?o.cards:{};for(const k in o.cards){const x=o.cards[k];if(!x||typeof x!=='object'){delete o.cards[k];continue}if(!Array.isArray(x.entries))x.entries=[]}o.pending=Array.isArray(o.pending)?o.pending:[];o.settings=o.settings&&typeof o.settings==='object'?o.settings:{};if(!CUR.includes(o.settings.cur))o.settings.cur='USD';return o}const n={v:2,cards:{},pending:Array.isArray(o.pending)?o.pending:[],settings:{cur:'USD'}};
   for(const[id,x]of Object.entries(o.cards||{})){if(x&&x.entries){n.cards[id]=x;continue}
     if(x&&x.status==='own'){const p=parseFloat(x.price);n.cards[id]={entries:[{qty:1,price:isNaN(p)?null:p,cur:'USD',grade:x.grade||'ungraded',date:x.date||''}]}}}
   return n}
@@ -28,7 +29,10 @@ function stats(c){const E=ents(c.id);let qty=0,cost=0,costOk=0,val=0,valOk=0;
     const m=c.prices_usd?.[e.grade];if(m!=null){val+=q*m*fx();valOk+=q}}
   return{qty,cost,val,costOk,valOk,gl:costOk&&costOk===valOk&&costOk===qty?val-cost:null}}
 const pass=c=>(F.lang==='all'||c.language===F.lang)&&(F.set==='all'||c.set===F.set)&&(F.own==='all'||(F.own==='own')===(stats(c).qty>0));
-async function init(){
+function fatal(e){console.error(e);const m=document.getElementById('m');if(m)m.innerHTML=`<div class="empty" style="text-align:left"><b style="color:var(--eye)">👻 Something went wrong loading the app.</b><br><small>${esc(e&&e.message||e)}</small><br><br>Your collection data is kept. Try:<br><button class="addb" id="rst">Reset app cache &amp; reload</button></div>`}
+async function resetCache(){try{for(const r of await navigator.serviceWorker.getRegistrations())await r.unregister()}catch{}try{for(const k of await caches.keys())await caches.delete(k)}catch{}location.replace(location.pathname+'?r='+Date.now())}
+async function init(){try{await init0()}catch(e){fatal(e)}}
+async function init0(){
   try{R=await (await fetch('rates.json')).json()}catch{}
   try{D=await (await fetch('prices.json',{cache:'no-store'})).json()}catch(e){$('#upd').textContent='Offline and no cached prices yet'}
   if(U.pending){const n=U.pending.length;U.pending=U.pending.filter(p=>!D.cards.some(c=>c.url===p.url));if(n!==U.pending.length)save()}
@@ -54,7 +58,7 @@ function render(){
   h+=`<button class="addb" id="add">＋ Add card</button>`;
   const pend=(U.pending||[]).filter(p=>!D.cards.some(c=>c.url===p.url));
   if(pend.length)h+=`<h2>Pending · prices arrive on next refresh</h2>`+pend.map(p=>`<div class="c pend"><div style="font-size:40px;text-align:center">👻</div><div><div class="nm">${esc(p.name||'New card')}</div><div class="meta">${esc([p.set,p.number&&'#'+p.number].filter(Boolean).join(' · '))}</div><div class="meta"><b>Pending</b> · added ${dt(p.added,{month:'short',day:'numeric'})}</div>${p.url?`<div class="src"><a href="${esc(p.url)}" target="_blank" rel="noopener">PriceCharting ↗</a></div>`:''}</div><div class="act"><button data-cp="${esc(p.added)}">Copy request for Grok Bot</button><button data-rp="${esc(p.added)}">Remove</button></div></div>`).join('');
-  h+=`<div class="bk"><button class="btn" id="exp">Export my data</button><button class="btn" id="impb">Import backup</button></div><div class="note" style="text-align:center">FX: ${esc(R.source||'')} ${R.date?dt(R.date,{dateStyle:'medium'}):''} · PriceCharting prices are USD, converted.</div>`;
+  h+=`<div class="bk"><button class="btn" id="exp">Export my data</button><button class="btn" id="impb">Import backup</button></div><div class="note" style="text-align:center"><button class="btn" id="rst2" style="margin:8px 0">Reset app cache</button><br>FX: ${esc(R.source||'')} ${R.date?dt(R.date,{dateStyle:'medium'}):''} · PriceCharting prices are USD, converted.</div>`;
   $('#m').innerHTML=h;
 }
 function entries(id){const c=D.cards.find(x=>x.id===id);if(!c)return;const E=ents(id),s=stats(c);
@@ -96,7 +100,7 @@ function addForm(){$('#ov').innerHTML=`<div class="ov" data-close><div class="sh
   <button class="addb" id="a-save">Save as pending</button>
   <div class="note">Your phone can't fetch PriceCharting itself. The card is saved here as <b>pending</b>; prices and chart appear after the next refresh once it's on the watch list. Simplest: tap “Copy request for Grok Bot” and paste it to Grok Bot in chat, and it'll add it.</div></div></div>`}
 
-document.addEventListener('click',e=>{const t=e.target,b=t.closest('button');
+document.addEventListener('click',e=>{const t=e.target,b=t.closest('button');if(b&&(b.id==='rst'||b.id==='rst2')){resetCache();return}
   const dd=t.closest('[data-d]');if(t.closest('[data-jh]')){jhForm(t.closest('[data-jh]').dataset.jh);return}
   if(dd&&!b){detail(dd.dataset.d);return}
   if(t.classList&&t.classList.contains('ov')||(b&&b.classList.contains('x'))){$('#ov').innerHTML='';render();return}
@@ -129,7 +133,7 @@ document.addEventListener('change',e=>{const t=e.target;
 addEventListener('online',render);addEventListener('offline',render);
 if('serviceWorker' in navigator){
   const had=!!navigator.serviceWorker.controller;let reloaded=false;
-  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!reloaded){reloaded=true;location.reload()}});
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!reloaded&&!sessionStorage.getItem('swr')){reloaded=true;sessionStorage.setItem('swr','1');location.reload()}});
   navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(reg=>{reg.update();document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')reg.update()})});
 }
-init();
+window.__boot=1;init().catch(fatal);

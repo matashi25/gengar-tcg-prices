@@ -53,7 +53,9 @@ h2{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em
 </style></head><body>
 <header><h1><img src="icon.svg" alt="">Gengar TCG Prices</h1><div class="upd" id="upd">Loading…</div>
 </header>
-<main id="m"></main>
+<main id="m"><div class="empty">Loading… 👻</div></main>
 <div id="ov"></div>
 <input type="file" id="imp" accept="application/json" hidden>
-<script src="app.js?v=8"></script></body></html>
+<script>window.onerror=function(m){var e=document.getElementById('m');if(e)e.innerHTML='<div class="empty">👻 App error: '+String(m).replace(/</g,'&lt;')+'<br><button class="addb" onclick="(async()=>{try{for(const r of await navigator.serviceWorker.getRegistrations())await r.unregister();for(const k of await caches.keys())await caches.delete(k)}catch(x){}location.replace(location.pathname+\'?r=\'+Date.now())})()">Reset app cache &amp; reload</button></div>'};
+setTimeout(function(){if(!window.__boot)window.onerror('app.js did not load')},8000)</script>
+<script src="app.js?v=9"></script></body></html>
