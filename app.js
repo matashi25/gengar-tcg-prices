@@ -15,7 +15,7 @@ function u(id){return U.cards[id]||(U.cards[id]={status:null,grade:'ungraded',pr
 function card(c){
   const x=u(c.id),p=c.prices_usd||{},own=x.status==='own',cur=p[x.grade],bp=parseFloat(x.price),gl=own&&!isNaN(bp)&&cur!=null?cur-bp:null;
   return `<div class="c">${c.image?`<img src="${c.image}" alt="" loading="lazy" data-d="${c.id}">`:'<div></div>'}<div>
-  <div class="nm" data-d="${c.id}">${esc(c.name)} <span style="font-size:12px;color:var(--glow)">📈</span><span class="tag ${c.language==='EN'?'en':''}">${c.language}</span></div>
+  <div class="nm" data-d="${c.id}">${esc(c.name)} <span style="font-size:12px;color:var(--glow)">📈</span><span class="tag ${c.language.toLowerCase()}">${c.language}</span></div>
   <div class="meta">${esc(c.set)} · #${esc(c.number)}</div>
   <div class="pr"><div><small>Ungraded</small>${f(p.ungraded)}</div><div><small>Grade 9</small>${f(p.grade_9)}</div><div><small>PSA 10</small>${f(p.psa_10)}</div></div>
   <div class="src"><a href="${c.url}" target="_blank" rel="noopener">PriceCharting ↗</a><span>eBay: <i>not connected yet</i></span><span>集换社: <i>not connected yet</i></span></div></div>
@@ -67,7 +67,7 @@ function chart(pts){
 }
 async function detail(id){const c=D.cards.find(x=>x.id===id);if(!c)return;let H={};try{H=await (await fetch(c.history)).json()}catch{}
   const all=series(H),cut={'1y':365,'2y':730}[rng],pts=cut?all.filter(p=>p[0]>=Date.now()-cut*864e5):all,p=c.prices_usd||{};
-  $('#ov').innerHTML=`<div class="ov" data-close><div class="sheet"><div class="top">${c.image?`<img src="${c.image}">`:''}<div><div class="nm">${esc(c.name)} <span class="tag ${c.language==='EN'?'en':''}">${c.language}</span></div><div class="meta">${esc(c.set)} · #${esc(c.number)}</div></div><button class="x" data-close>×</button></div>
+  $('#ov').innerHTML=`<div class="ov" data-close><div class="sheet"><div class="top">${c.image?`<img src="${c.image}">`:''}<div><div class="nm">${esc(c.name)} <span class="tag ${c.language.toLowerCase()}">${c.language}</span></div><div class="meta">${esc(c.set)} · #${esc(c.number)}</div></div><button class="x" data-close>×</button></div>
   <div class="pr">${SER.map(([k,n,col])=>`<div><small style="color:${col}">${n}</small>${f(p[k])}</div>`).join('')}</div>
   <div class="chart">${chart(pts)}</div><div class="leg">${SER.map(([k,n,col])=>`<span><i style="background:${col};box-shadow:0 0 6px ${col}"></i>${n}</span>`).join('')}</div>
   <div class="rng">${[['1y','1Y'],['2y','2Y'],['all','All']].map(([k,n])=>`<button data-rng="${k}" data-id="${id}" class="${rng===k?'on':''}">${n}</button>`).join('')}</div>
