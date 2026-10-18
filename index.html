@@ -27,9 +27,20 @@ main{padding:12px calc(env(safe-area-inset-right) + 12px) calc(env(safe-area-ins
 .gl{grid-column:1/-1;font-size:13px}.up{color:var(--up)}.down{color:var(--down)}
 h2{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;margin:18px 4px 8px}.empty{color:var(--mut);text-align:center;padding:14px;border:1px dashed var(--line);border-radius:14px}
 .bk{display:flex;gap:8px;margin-top:20px}
+.c img,.nm{cursor:pointer}.pend{border-style:dashed;opacity:.85}.pend .meta b{color:var(--eye)}
+.addb{width:100%;margin:4px 0 12px;padding:11px;border-radius:14px;border:1px dashed var(--glow);background:rgba(124,58,237,.15);color:#e9d5ff;font-weight:700;font-size:14px}
+.ov{position:fixed;inset:0;z-index:20;background:rgba(6,3,16,.8);backdrop-filter:blur(6px);overflow:auto;padding:calc(env(safe-area-inset-top) + 14px) calc(env(safe-area-inset-right) + 12px) calc(env(safe-area-inset-bottom) + 14px) calc(env(safe-area-inset-left) + 12px)}
+.sheet{max-width:640px;margin:auto;background:var(--card);border:1px solid var(--glow);border-radius:18px;padding:14px;box-shadow:0 0 30px rgba(168,85,247,.45)}
+.sheet .top{display:flex;gap:12px;align-items:center}.sheet .top img{width:70px;border-radius:6px}.x{margin-left:auto;background:none;border:0;color:var(--mut);font-size:26px}
+.chart{margin-top:10px;background:#120a28;border-radius:12px;padding:6px}.chart svg{width:100%;height:auto;display:block}
+.leg{display:flex;gap:12px;font-size:12px;justify-content:center;margin:6px 0}.leg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+.rng{display:flex;gap:6px;margin-top:8px}.rng button{flex:1;padding:6px;border-radius:9px;border:1px solid var(--line);background:var(--card2);color:var(--mut);font-size:12px}.rng button.on{color:#fff;border-color:var(--glow);box-shadow:0 0 8px var(--glow)}
+.sheet input,.sheet select{width:100%;padding:9px;border-radius:10px;border:1px solid var(--line);background:#120a28;color:var(--txt);font-size:16px;margin:4px 0 8px}.sheet label{font-size:12px;color:var(--mut)}
+.note{font-size:12px;color:var(--mut);margin-top:8px}
 </style></head><body>
 <header><h1><img src="icon.svg" alt="">Gengar TCG Prices</h1><div class="upd" id="upd">Loading…</div>
 <nav><button id="t-own" class="on">Collection</button><button id="t-wish">Wish list</button></nav></header>
 <main id="m"></main>
+<div id="ov"></div>
 <input type="file" id="imp" accept="application/json" hidden>
 <script src="app.js"></script></body></html>

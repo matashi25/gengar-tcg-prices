@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-18T13:54:59Z",
+  "updated_at": "2026-10-18T14:14:37Z",
   "source": "PriceCharting",
   "cards": [
     {
@@ -10,6 +10,7 @@
       "language": "EN",
       "url": "https://www.pricecharting.com/game/pokemon-scarlet-&-violet-151/venusaur-ex-198",
       "image": "img/en-151-198.jpg",
+      "history": "history/en-151-198.json",
       "prices_usd": {
         "ungraded": 93.99,
         "grade_7": 83.38,
@@ -20,7 +21,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-10-18T13:54:56Z"
+      "fetched_at": "2026-10-18T14:14:37Z"
     },
     {
       "id": "en-151-199",
@@ -30,6 +31,7 @@
       "language": "EN",
       "url": "https://www.pricecharting.com/game/pokemon-scarlet-&-violet-151/charizard-ex-199",
       "image": "img/en-151-199.jpg",
+      "history": "history/en-151-199.json",
       "prices_usd": {
         "ungraded": 341.73,
         "grade_7": 249.0,
@@ -40,7 +42,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-10-18T13:54:57Z"
+      "fetched_at": "2026-10-18T14:14:37Z"
     },
     {
       "id": "en-151-200",
@@ -50,6 +52,7 @@
       "language": "EN",
       "url": "https://www.pricecharting.com/game/pokemon-scarlet-&-violet-151/blastoise-ex-200",
       "image": "img/en-151-200.jpg",
+      "history": "history/en-151-200.json",
       "prices_usd": {
         "ungraded": 115.0,
         "grade_7": 104.75,
@@ -60,7 +63,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-10-18T13:54:58Z"
+      "fetched_at": "2026-10-18T14:14:37Z"
     },
     {
       "id": "jp-sv2a-200",
@@ -70,6 +73,7 @@
       "language": "JP",
       "url": "https://www.pricecharting.com/game/pokemon-japanese-scarlet-&-violet-151/venusaur-ex-200",
       "image": "img/jp-sv2a-200.jpg",
+      "history": "history/jp-sv2a-200.json",
       "prices_usd": {
         "ungraded": 108.72,
         "grade_7": 67.69,
@@ -80,7 +84,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-10-18T13:54:58Z"
+      "fetched_at": "2026-10-18T14:14:37Z"
     },
     {
       "id": "jp-sv2a-201",
@@ -90,6 +94,7 @@
       "language": "JP",
       "url": "https://www.pricecharting.com/game/pokemon-japanese-scarlet-&-violet-151/charizard-ex-201",
       "image": "img/jp-sv2a-201.jpg",
+      "history": "history/jp-sv2a-201.json",
       "prices_usd": {
         "ungraded": 333.01,
         "grade_7": 301.22,
@@ -100,7 +105,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-10-18T13:54:59Z"
+      "fetched_at": "2026-10-18T14:14:37Z"
     },
     {
       "id": "jp-sv2a-202",
@@ -110,6 +115,7 @@
       "language": "JP",
       "url": "https://www.pricecharting.com/game/pokemon-japanese-scarlet-&-violet-151/blastoise-ex-202",
       "image": "img/jp-sv2a-202.jpg",
+      "history": "history/jp-sv2a-202.json",
       "prices_usd": {
         "ungraded": 125.5,
         "grade_7": 48.0,
@@ -120,7 +126,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-10-18T13:54:59Z"
+      "fetched_at": "2026-10-18T14:14:37Z"
     }
   ]
 }
