@@ -26,7 +26,7 @@ function card(c){
   <div class="gl">Now (${GR[x.grade]}): <b>${f(cur)}</b>${gl!=null?` · <b class="${gl>=0?'up':'down'}">${gl>=0?'▲ +':'▼ −'}${f(Math.abs(gl)).slice(1)} (${(gl/bp*100).toFixed(1)}%)</b>`:''}</div>`:''}</div>`;
 }
 function render(){
-  if(D.updated_at) $('#upd').innerHTML=`Prices updated <b>${dt(D.updated_at,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'})}</b> · PriceCharting${navigator.onLine?'':' · offline'}`;
+  if(D.updated_at) $('#upd').innerHTML=`Prices updated <b>${dt(D.updated_at,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'})}</b> · PriceCharting${navigator.onLine?'':' · offline'} · <span style="color:var(--glow)">${APP_VERSION}</span>`;
   $('#t-own').classList.toggle('on',tab==='own');$('#t-wish').classList.toggle('on',tab==='wish');
   const mine=D.cards.filter(c=>u(c.id).status===tab),rest=D.cards.filter(c=>!u(c.id).status);
   let h='';
@@ -90,5 +90,11 @@ document.addEventListener('click',e=>{const t=e.target;
     (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>alert('Copied! Paste it to Grok Bot.'),()=>prompt('Copy this and send it to Grok Bot:',txt));return}
 });
 addEventListener('online',render);addEventListener('offline',render);
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
+const APP_VERSION='v4';
+if('serviceWorker' in navigator){
+  const had=!!navigator.serviceWorker.controller;let reloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!reloaded){reloaded=true;location.reload()}});
+  navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(reg=>{reg.update();
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')reg.update()})});
+}
 init();
