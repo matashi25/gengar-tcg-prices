@@ -1,5 +1,5 @@
 const KEY='tcg-user-v1',GR={ungraded:'Ungraded',grade_7:'Grade 7',grade_8:'Grade 8',grade_9:'Grade 9',grade_9_5:'Grade 9.5',psa_10:'PSA 10'};
-const CUR=['USD','CNY','JPY','HKD','SGD','MYR','EUR','GBP','AUD','CAD','KRW','TWD'],APP_VERSION='v7';
+const CUR=['USD','CNY','JPY','HKD','SGD','MYR','EUR','GBP','AUD','CAD','KRW','TWD'],APP_VERSION='v8';
 const TZ='America/Los_Angeles',dt=(t,o)=>new Date(t).toLocaleString('en-US',{timeZone:TZ,...o});
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let D={cards:[]},R={rates:{USD:1}},U=migrate(load());
@@ -15,6 +15,13 @@ const saveF=()=>localStorage.setItem('tcg-filter-v1',JSON.stringify(F));
 const disp=()=>U.settings.cur||'USD',rate=c=>R.rates[c]||null,fx=()=>rate(disp())||1,SYM=()=>(0).toLocaleString('en-US',{style:'currency',currency:disp(),maximumFractionDigits:0}).replace(/[\d.,\s]/g,'');
 const money=(v,c=disp())=>v==null||isNaN(v)?'—':(+v).toLocaleString('en-US',{style:'currency',currency:c,maximumFractionDigits:['JPY','KRW','TWD'].includes(c)?0:2});
 const f=usd=>usd==null?'—':money(usd*fx());
+const jh=id=>U.cards[id]&&U.cards[id].jhs;
+const jhTxt=id=>{const j=jh(id);if(!j||j.price==null)return '<i>tap to add</i>';const usd=rate(j.cur)?j.price/rate(j.cur):null;return `<b>${usd!=null?money(usd*fx()):money(j.price,j.cur)}</b>${j.cur!==disp()?` (${money(j.price,j.cur)})`:''}${j.label?' · '+esc(j.label):''} · <i>entered ${dt(j.date,{month:'short',day:'numeric',year:'numeric'})}</i>`};
+function jhForm(id){const c=D.cards.find(x=>x.id===id),j=jh(id)||{cur:'CNY'};$('#ov').innerHTML=`<div class="ov" data-close><div class="sheet"><div class="top"><div><div class="nm">集换社 price</div><div class="meta">${esc(c.name)} · ${esc(c.set)} #${esc(c.number)}</div></div><button class="x" data-close>×</button></div>
+  <label>Price</label><input id="j-p" inputmode="decimal" value="${j.price??''}" placeholder="0.00"><label>Currency</label><select id="j-c">${CUR.map(x=>`<option ${x===(j.cur||'CNY')?'selected':''}>${x}</option>`).join('')}</select>
+  <label>Grade / condition (optional)</label><input id="j-l" value="${esc(j.label||'')}" placeholder="e.g. 裸卡 / PSA 10">
+  <button class="addb" data-js="${id}">Save</button>${j.price!=null?`<button class="del" style="width:100%" data-jc="${id}">Clear 集换社 price</button>`:''}
+  <div class="note">${j.date?'Last entered '+dt(j.date,{dateStyle:'medium',timeStyle:'short'})+' (Pacific). ':''}Saved only on this phone (included in Export).</div></div></div>`}
 const ents=id=>(U.cards[id]&&U.cards[id].entries)||[];
 function stats(c){const E=ents(c.id);let qty=0,cost=0,costOk=0,val=0,valOk=0;
   for(const e of E){const q=+e.qty||0;qty+=q;const p=parseFloat(e.price);if(!isNaN(p)&&rate(e.cur)){cost+=q*p/rate(e.cur)*fx();costOk+=q}
@@ -35,7 +42,7 @@ function card(c){const p=c.prices_usd||{},s=stats(c);
   <div class="nm" data-d="${c.id}">${esc(c.name)} <span style="font-size:12px;color:var(--glow)">📈</span><span class="tag ${c.language.toLowerCase()}">${c.language}</span>${s.qty?`<span class="own-b">Owned ×${s.qty}</span>`:''}</div>
   <div class="meta">${esc(c.set)} · #${esc(c.number)}</div>
   <div class="pr"><div><small>Ungraded</small>${f(p.ungraded)}</div><div><small>Grade 9</small>${f(p.grade_9)}</div><div><small>PSA 10</small>${f(p.psa_10)}</div></div>
-  <div class="src"><a href="${c.url}" target="_blank" rel="noopener">PriceCharting ↗</a><span>eBay: <i>not connected yet</i></span><span>集换社: <i>not connected yet</i></span></div></div>
+  <div class="src"><a href="${c.url}" target="_blank" rel="noopener">PriceCharting ↗</a><span>eBay: <i>not connected yet</i></span><span class="jhs" data-jh="${c.id}">集换社: ${jhTxt(c.id)}</span></div></div>
   ${s.qty?`<div class="sum"><div><small>Qty</small>${s.qty}</div><div><small>Avg cost</small>${s.costOk?money(s.cost/s.costOk):'—'}</div><div><small>Value</small>${s.valOk?money(s.val):'—'}</div><div><small>Gain/loss</small>${s.gl==null?'—':`<b class="${s.gl>=0?'up':'down'}">${s.gl>=0?'+':'−'}${money(Math.abs(s.gl))}</b>`}</div></div>`:''}
   <div class="act"><button data-en="${c.id}">${s.qty?`✎ My copies (${ents(c.id).length} ${ents(c.id).length===1?'entry':'entries'})`:'＋ I own this'}</button></div></div>`}
 function render(){
@@ -80,7 +87,7 @@ async function detail(id){const c=D.cards.find(x=>x.id===id);if(!c)return;let H=
   const all=series(H).map(p=>[p[0],...p.slice(1).map(v=>v==null?null:v*fx())]),cut={'1y':365,'2y':730}[rng],pts=cut?all.filter(p=>p[0]>=Date.now()-cut*864e5):all,p=c.prices_usd||{};
   $('#ov').innerHTML=`<div class="ov" data-close><div class="sheet"><div class="top">${c.image?`<img src="${c.image}">`:''}<div><div class="nm">${esc(c.name)} <span class="tag ${c.language.toLowerCase()}">${c.language}</span></div><div class="meta">${esc(c.set)} · #${esc(c.number)}</div></div><button class="x" data-close>×</button></div>
   <div class="pr">${SER.map(([k,n,col])=>`<div><small style="color:${col}">${n}</small>${f(p[k])}</div>`).join('')}</div>
-  <div class="chart">${chart(pts)}</div><div class="leg">${SER.map(([k,n,col])=>`<span><i style="background:${col};box-shadow:0 0 6px ${col}"></i>${n}</span>`).join('')}</div>
+  <div class="src" style="margin:4px 0"><span class="jhs" data-jh="${c.id}">集换社: ${jhTxt(c.id)}</span><span>eBay: <i>not connected yet</i></span></div><div class="chart">${chart(pts)}</div><div class="leg">${SER.map(([k,n,col])=>`<span><i style="background:${col};box-shadow:0 0 6px ${col}"></i>${n}</span>`).join('')}</div>
   <div class="rng">${[['1y','1Y'],['2y','2Y'],['all','All']].map(([k,n])=>`<button data-rng="${k}" data-id="${id}" class="${rng===k?'on':''}">${n}</button>`).join('')}</div>
   <div class="note">${all.length} points: monthly history from PriceCharting + daily refresh snapshots. Last point ${all.length?dt(all[all.length-1][0],{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}):'—'} (Pacific time). <a href="${c.url}" target="_blank" rel="noopener">PriceCharting ↗</a></div></div></div>`}
 function addForm(){$('#ov').innerHTML=`<div class="ov" data-close><div class="sheet"><div class="top"><div class="nm">Add a card 👻</div><button class="x" data-close>×</button></div>
@@ -90,12 +97,15 @@ function addForm(){$('#ov').innerHTML=`<div class="ov" data-close><div class="sh
   <div class="note">Your phone can't fetch PriceCharting itself. The card is saved here as <b>pending</b>; prices and chart appear after the next refresh once it's on the watch list. Simplest: tap “Copy request for Grok Bot” and paste it to Grok Bot in chat, and it'll add it.</div></div></div>`}
 
 document.addEventListener('click',e=>{const t=e.target,b=t.closest('button');
-  const dd=t.closest('[data-d]');if(dd&&!b){detail(dd.dataset.d);return}
+  const dd=t.closest('[data-d]');if(t.closest('[data-jh]')){jhForm(t.closest('[data-jh]').dataset.jh);return}
+  if(dd&&!b){detail(dd.dataset.d);return}
   if(t.classList&&t.classList.contains('ov')||(b&&b.classList.contains('x'))){$('#ov').innerHTML='';render();return}
   if(!b)return;const d=b.dataset;
   if(d.rng){rng=d.rng;detail(d.id);return}
   if(d.fl){F.lang=d.fl;saveF();render();return}
   if(d.fo){F.own=d.fo;saveF();render();return}
+  if(d.js){const v=parseFloat($('#j-p').value);const o=(U.cards[d.js]=U.cards[d.js]||{entries:[]});if(isNaN(v)){alert('Enter a price');return}o.jhs={price:v,cur:$('#j-c').value,label:$('#j-l').value.trim(),date:new Date().toISOString()};save();$('#ov').innerHTML='';render();return}
+  if(d.jc){delete U.cards[d.jc].jhs;save();$('#ov').innerHTML='';render();return}
   if(d.en){entries(d.en);return}
   if(d.ne){(U.cards[d.ne]=U.cards[d.ne]||{entries:[]}).entries.push({qty:1,price:null,cur:disp(),grade:'ungraded',date:''});save();entries(d.ne);return}
   if(d.del){const id=$('#ov').dataset.id;if(confirm('Delete this purchase entry?')){U.cards[id].entries.splice(+d.del,1);save();entries(id)}return}
