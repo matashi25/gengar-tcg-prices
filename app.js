@@ -1,6 +1,11 @@
 const KEY='tcg-user-v1',GR={ungraded:'Ungraded',grade_7:'Grade 7',grade_8:'Grade 8',grade_9:'Grade 9',grade_9_5:'Grade 9.5',psa_10:'PSA 10'};
 let D={cards:[]},U=load(),tab=new URLSearchParams(location.search).get('tab')==='wish'?'wish':'own';
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||{cards:{}}}catch{return{cards:{}}}}
+let F=(()=>{try{return JSON.parse(localStorage.getItem('tcg-filter-v1'))||{}}catch{return{}}})();F.lang=F.lang||'all';F.set=F.set||'all';
+const saveF=()=>localStorage.setItem('tcg-filter-v1',JSON.stringify(F));
+const pass=c=>(F.lang==='all'||c.language===F.lang)&&(F.set==='all'||c.set===F.set);
+function filters(){const L=[...new Set(D.cards.map(c=>c.language))].sort(),S=[...new Set(D.cards.filter(c=>F.lang==='all'||c.language===F.lang).map(c=>c.set))].sort();if(F.set!=='all'&&!S.includes(F.set))F.set='all';
+  return `<div class="flt"><div class="chips">${['all',...L].map(l=>`<button data-fl="${l}" class="${F.lang===l?'on':''}">${l==='all'?'All':l}</button>`).join('')}</div><select id="fset"><option value="all">All sets</option>${S.map(x=>`<option ${x===F.set?'selected':''}>${esc(x)}</option>`).join('')}</select></div>`}
 function save(){localStorage.setItem(KEY,JSON.stringify(U))}
 const TZ='America/Los_Angeles',dt=(t,o)=>new Date(t).toLocaleString('en-US',{timeZone:TZ,...o});
 const $=s=>document.querySelector(s),f=v=>v==null||isNaN(v)?'—':'$'+(+v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -28,8 +33,8 @@ function card(c){
 function render(){
   if(D.updated_at) $('#upd').innerHTML=`Prices updated <b>${dt(D.updated_at,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'})}</b> · PriceCharting${navigator.onLine?'':' · offline'} · <span style="color:var(--glow)">${APP_VERSION}</span>`;
   $('#t-own').classList.toggle('on',tab==='own');$('#t-wish').classList.toggle('on',tab==='wish');
-  const mine=D.cards.filter(c=>u(c.id).status===tab),rest=D.cards.filter(c=>!u(c.id).status);
-  let h='';
+  const mine=D.cards.filter(c=>pass(c)&&u(c.id).status===tab),rest=D.cards.filter(c=>pass(c)&&!u(c.id).status);
+  let h=filters();
   if(tab==='own'){let v=0,cost=0;for(const c of mine){const x=u(c.id),cur=c.prices_usd?.[x.grade];if(cur!=null)v+=cur;const b=parseFloat(x.price);if(!isNaN(b))cost+=b}
     const g=v-cost;h+=`<div class="tot"><div><small>Cards</small><b>${mine.length}</b></div><div><small>Value</small><b>${f(v)}</b></div><div><small>Gain/loss</small><b class="${g>=0?'up':'down'}">${cost?(g>=0?'+':'−')+f(Math.abs(g)).slice(1):'—'}</b></div></div>`}
   else{let v=0;for(const c of mine)v+=c.prices_usd?.ungraded||0;h+=`<div class="tot"><div><small>Wanted</small><b>${mine.length}</b></div><div><small>Ungraded total</small><b>${f(v)}</b></div><div><small>PSA 10 total</small><b>${f(mine.reduce((a,c)=>a+(c.prices_usd?.psa_10||0),0))}</b></div></div>`}
@@ -42,12 +47,14 @@ function render(){
   $('#m').innerHTML=h;
 }
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.fl){F.lang=b.dataset.fl;saveF();render();return}
   if(b.id==='t-own'||b.id==='t-wish'){tab=b.id==='t-own'?'own':'wish';render();scrollTo(0,0);return}
   if(b.dataset.s){const x=u(b.dataset.id);x.status=x.status===b.dataset.s?null:b.dataset.s;save();render();return}
   if(b.id==='exp'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({app:'gengar-tcg',exported_at:new Date().toISOString(),...U},null,2)],{type:'application/json'}));a.download='tcg-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();return}
   if(b.id==='impb')$('#imp').click();
 });
 document.addEventListener('change',e=>{const t=e.target;
+  if(t.id==='fset'){F.set=t.value;saveF();render();return}
   if(t.id==='imp'){const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(!j.cards)throw 0;if(confirm('Replace your current collection data with this backup?')){U={cards:j.cards};save();render()}}catch{alert('Not a valid backup file')}};r.readAsText(t.files[0]);t.value='';return}
   if(t.dataset.k){u(t.dataset.id)[t.dataset.k]=t.value;save();render()}
 });
@@ -90,7 +97,7 @@ document.addEventListener('click',e=>{const t=e.target;
     (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>alert('Copied! Paste it to Grok Bot.'),()=>prompt('Copy this and send it to Grok Bot:',txt));return}
 });
 addEventListener('online',render);addEventListener('offline',render);
-const APP_VERSION='v5';
+const APP_VERSION='v6';
 if('serviceWorker' in navigator){
   const had=!!navigator.serviceWorker.controller;let reloaded=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!reloaded){reloaded=true;location.reload()}});
