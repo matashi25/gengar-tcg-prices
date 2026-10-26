@@ -94,5 +94,21 @@
     "number": "SWSH145",
     "language": "EN",
     "url": "https://www.pricecharting.com/game/pokemon-celebrations/pikachu-v-swsh145"
+  },
+  {
+    "id": "cn-csv95c-234",
+    "url": "https://www.pricecharting.com/game/pokemon-chinese-csv95c/sylveon-ex-234",
+    "language": "CN",
+    "name": "Sylveon ex",
+    "set": "Pokemon Chinese CSV9.5C",
+    "number": "234"
+  },
+  {
+    "id": "cn-gem3-407",
+    "url": "https://www.pricecharting.com/game/pokemon-chinese-gem-pack-3/cubone-407",
+    "language": "CN",
+    "name": "Cubone",
+    "set": "Pokemon Chinese Gem Pack 3",
+    "number": "407"
   }
 ]

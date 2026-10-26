@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T14:32:44Z",
+  "updated_at": "2026-10-26T11:42:26Z",
   "source": "PriceCharting",
   "cards": [
     {
@@ -253,6 +253,48 @@
       "ebay": null,
       "jihuanshe": null,
       "fetched_at": "2026-10-25T14:32:44Z"
+    },
+    {
+      "id": "cn-csv95c-234",
+      "name": "Sylveon ex",
+      "set": "Pokemon Chinese CSV9.5C",
+      "number": "234",
+      "language": "CN",
+      "url": "https://www.pricecharting.com/game/pokemon-chinese-csv95c/sylveon-ex-234",
+      "image": null,
+      "history": "history/cn-csv95c-234.json",
+      "prices_usd": {
+        "ungraded": 221.82,
+        "grade_7": null,
+        "grade_8": 20.0,
+        "grade_9": 238.35,
+        "grade_9_5": 300.0,
+        "psa_10": 489.5
+      },
+      "ebay": null,
+      "jihuanshe": null,
+      "fetched_at": "2026-10-26T11:42:26Z"
+    },
+    {
+      "id": "cn-gem3-407",
+      "name": "Cubone",
+      "set": "Pokemon Chinese Gem Pack 3",
+      "number": "407",
+      "language": "CN",
+      "url": "https://www.pricecharting.com/game/pokemon-chinese-gem-pack-3/cubone-407",
+      "image": null,
+      "history": "history/cn-gem3-407.json",
+      "prices_usd": {
+        "ungraded": 204.5,
+        "grade_7": 171.0,
+        "grade_8": 214.25,
+        "grade_9": 236.0,
+        "grade_9_5": 256.0,
+        "psa_10": 407.5
+      },
+      "ebay": null,
+      "jihuanshe": null,
+      "fetched_at": "2026-10-26T11:42:26Z"
     }
   ]
 }
