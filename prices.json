@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-01T23:47:38Z",
+  "updated_at": "2026-11-05T19:11:33Z",
   "source": "PriceCharting",
   "cards": [
     {
@@ -12,16 +12,16 @@
       "image": "img/en-151-198.jpg",
       "history": "history/en-151-198.json",
       "prices_usd": {
-        "ungraded": 86.5,
-        "grade_7": 88.0,
-        "grade_8": 98.97,
-        "grade_9": 111.65,
+        "ungraded": 90.1,
+        "grade_7": 68.0,
+        "grade_8": 85.0,
+        "grade_9": 114.98,
         "grade_9_5": 122.5,
-        "psa_10": 398.46
+        "psa_10": 391.94
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "en-151-199",
@@ -33,16 +33,16 @@
       "image": "img/en-151-199.jpg",
       "history": "history/en-151-199.json",
       "prices_usd": {
-        "ungraded": 298.74,
-        "grade_7": 228.0,
-        "grade_8": 285.0,
-        "grade_9": 352.5,
+        "ungraded": 310.0,
+        "grade_7": 219.0,
+        "grade_8": 274.27,
+        "grade_9": 336.92,
         "grade_9_5": 590.5,
-        "psa_10": 1265.0
+        "psa_10": 1204.61
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "en-151-200",
@@ -54,16 +54,16 @@
       "image": "img/en-151-200.jpg",
       "history": "history/en-151-200.json",
       "prices_usd": {
-        "ungraded": 116.31,
-        "grade_7": 105.18,
-        "grade_8": 106.43,
-        "grade_9": 128.65,
+        "ungraded": 116.05,
+        "grade_7": 105.14,
+        "grade_8": 110.69,
+        "grade_9": 134.5,
         "grade_9_5": 150.0,
-        "psa_10": 500.0
+        "psa_10": 499.99
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "jp-sv2a-200",
@@ -75,16 +75,16 @@
       "image": "img/jp-sv2a-200.jpg",
       "history": "history/jp-sv2a-200.json",
       "prices_usd": {
-        "ungraded": 110.0,
-        "grade_7": 67.41,
+        "ungraded": 109.23,
+        "grade_7": 67.27,
         "grade_8": 105.0,
         "grade_9": 109.07,
         "grade_9_5": 120.0,
-        "psa_10": 159.5
+        "psa_10": 170.08
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "jp-sv2a-201",
@@ -96,16 +96,16 @@
       "image": "img/jp-sv2a-201.jpg",
       "history": "history/jp-sv2a-201.json",
       "prices_usd": {
-        "ungraded": 319.99,
+        "ungraded": 312.62,
         "grade_7": 240.0,
         "grade_8": 300.0,
         "grade_9": 330.0,
-        "grade_9_5": 350.0,
-        "psa_10": 518.06
+        "grade_9_5": 330.0,
+        "psa_10": 541.0
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "jp-sv2a-202",
@@ -118,15 +118,15 @@
       "history": "history/jp-sv2a-202.json",
       "prices_usd": {
         "ungraded": 118.19,
-        "grade_7": 39.16,
+        "grade_7": 39.08,
         "grade_8": 60.61,
-        "grade_9": 104.99,
+        "grade_9": 106.62,
         "grade_9_5": 125.01,
-        "psa_10": 185.0
+        "psa_10": 190.0
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "cn-gem5-107",
@@ -138,16 +138,16 @@
       "image": "img/cn-gem5-107.jpg",
       "history": "history/cn-gem5-107.json",
       "prices_usd": {
-        "ungraded": 203.65,
+        "ungraded": 208.25,
         "grade_7": null,
-        "grade_8": 181.78,
-        "grade_9": 199.5,
-        "grade_9_5": 369.0,
-        "psa_10": 377.0
+        "grade_8": 178.89,
+        "grade_9": 193.25,
+        "grade_9_5": 359.0,
+        "psa_10": 366.14
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "en-cel-4",
@@ -159,16 +159,16 @@
       "image": "img/en-cel-4.jpg",
       "history": "history/en-cel-4.json",
       "prices_usd": {
-        "ungraded": 155.44,
-        "grade_7": 158.52,
-        "grade_8": 212.04,
-        "grade_9": 233.0,
+        "ungraded": 136.62,
+        "grade_7": 140.5,
+        "grade_8": 142.5,
+        "grade_9": 173.0,
         "grade_9_5": 248.75,
-        "psa_10": 470.0
+        "psa_10": 440.0
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "en-cel-2",
@@ -180,16 +180,16 @@
       "image": "img/en-cel-2.jpg",
       "history": "history/en-cel-2.json",
       "prices_usd": {
-        "ungraded": 15.0,
+        "ungraded": 13.98,
         "grade_7": 24.0,
-        "grade_8": 34.5,
-        "grade_9": 44.33,
-        "grade_9_5": 49.0,
-        "psa_10": 123.0
+        "grade_8": 34.69,
+        "grade_9": 45.0,
+        "grade_9_5": 50.0,
+        "psa_10": 120.0
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "en-cel-15",
@@ -201,16 +201,16 @@
       "image": "img/en-cel-15.jpg",
       "history": "history/en-cel-15.json",
       "prices_usd": {
-        "ungraded": 10.06,
+        "ungraded": 10.98,
         "grade_7": 14.43,
-        "grade_8": 31.96,
-        "grade_9": 37.95,
-        "grade_9_5": 42.0,
-        "psa_10": 110.0
+        "grade_8": 26.35,
+        "grade_9": 35.0,
+        "grade_9_5": 39.0,
+        "psa_10": 109.28
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "en-cel-24",
@@ -222,16 +222,16 @@
       "image": "img/en-cel-24.jpg",
       "history": "history/en-cel-24.json",
       "prices_usd": {
-        "ungraded": 30.99,
-        "grade_7": 39.0,
-        "grade_8": 48.5,
-        "grade_9": 52.19,
-        "grade_9_5": 87.67,
-        "psa_10": 185.5
+        "ungraded": 28.98,
+        "grade_7": 40.0,
+        "grade_8": 50.0,
+        "grade_9": 56.0,
+        "grade_9_5": 105.0,
+        "psa_10": 182.16
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "en-cel-swsh145",
@@ -243,16 +243,16 @@
       "image": "img/en-cel-swsh145.jpg",
       "history": "history/en-cel-swsh145.json",
       "prices_usd": {
-        "ungraded": 95.49,
+        "ungraded": 97.94,
         "grade_7": 80.0,
         "grade_8": 82.69,
-        "grade_9": 107.99,
+        "grade_9": 106.5,
         "grade_9_5": 139.95,
-        "psa_10": 829.99
+        "psa_10": 826.13
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "cn-csv95c-234",
@@ -261,19 +261,19 @@
       "number": "234",
       "language": "CN",
       "url": "https://www.pricecharting.com/game/pokemon-chinese-csv95c/sylveon-ex-234",
-      "image": null,
+      "image": "img/cn-csv95c-234.jpg",
       "history": "history/cn-csv95c-234.json",
       "prices_usd": {
-        "ungraded": 230.71,
+        "ungraded": 232.43,
         "grade_7": null,
         "grade_8": 20.0,
-        "grade_9": 223.5,
-        "grade_9_5": 282.5,
-        "psa_10": 415.5
+        "grade_9": 223.45,
+        "grade_9_5": 315.0,
+        "psa_10": 395.33
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     },
     {
       "id": "cn-gem3-407",
@@ -282,19 +282,19 @@
       "number": "407",
       "language": "CN",
       "url": "https://www.pricecharting.com/game/pokemon-chinese-gem-pack-3/cubone-407",
-      "image": null,
+      "image": "img/cn-gem3-407.jpg",
       "history": "history/cn-gem3-407.json",
       "prices_usd": {
         "ungraded": 194.02,
-        "grade_7": 171.0,
-        "grade_8": 214.25,
-        "grade_9": 236.0,
-        "grade_9_5": 260.0,
-        "psa_10": 415.0
+        "grade_7": 144.0,
+        "grade_8": 179.54,
+        "grade_9": 198.75,
+        "grade_9_5": 232.75,
+        "psa_10": 420.86
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-01T23:47:38Z"
+      "fetched_at": "2026-11-05T19:11:33Z"
     }
   ]
 }
