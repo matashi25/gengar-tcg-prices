@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-05T19:11:33Z",
+  "updated_at": "2026-11-06T19:08:23Z",
   "source": "PriceCharting",
   "cards": [
     {
@@ -21,7 +21,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "en-151-199",
@@ -33,16 +33,16 @@
       "image": "img/en-151-199.jpg",
       "history": "history/en-151-199.json",
       "prices_usd": {
-        "ungraded": 310.0,
-        "grade_7": 219.0,
-        "grade_8": 274.27,
-        "grade_9": 336.92,
+        "ungraded": 299.95,
+        "grade_7": 216.0,
+        "grade_8": 269.69,
+        "grade_9": 337.65,
         "grade_9_5": 590.5,
-        "psa_10": 1204.61
+        "psa_10": 1225.5
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "en-151-200",
@@ -63,7 +63,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "jp-sv2a-200",
@@ -84,7 +84,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "jp-sv2a-201",
@@ -105,7 +105,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "jp-sv2a-202",
@@ -118,15 +118,15 @@
       "history": "history/jp-sv2a-202.json",
       "prices_usd": {
         "ungraded": 118.19,
-        "grade_7": 39.08,
-        "grade_8": 60.61,
+        "grade_7": 39.04,
+        "grade_8": 60.62,
         "grade_9": 106.62,
         "grade_9_5": 125.01,
-        "psa_10": 190.0
+        "psa_10": 188.12
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "cn-gem5-107",
@@ -147,7 +147,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "en-cel-4",
@@ -168,7 +168,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "en-cel-2",
@@ -189,7 +189,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "en-cel-15",
@@ -210,7 +210,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "en-cel-24",
@@ -231,7 +231,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "en-cel-swsh145",
@@ -252,7 +252,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "cn-csv95c-234",
@@ -273,7 +273,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     },
     {
       "id": "cn-gem3-407",
@@ -294,7 +294,7 @@
       },
       "ebay": null,
       "jihuanshe": null,
-      "fetched_at": "2026-11-05T19:11:33Z"
+      "fetched_at": "2026-11-06T19:08:23Z"
     }
   ]
 }
