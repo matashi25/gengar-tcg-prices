@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8">
+<!doctype html><html lang="en" data-app="v10"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#1a0f33"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="TCG Prices">
@@ -50,12 +50,19 @@ h2{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em
 #fcur{width:auto;padding:8px 10px;border-radius:999px;border:1px solid var(--glow);background:var(--card);color:#fff;font-size:16px;font-weight:700}
 .c{grid-template-columns:78px minmax(0,1fr)!important}.pr{grid-template-columns:repeat(3,minmax(0,1fr))!important}.sum,.tot.t4{grid-template-columns:repeat(4,minmax(0,1fr))!important}.c>div{min-width:0}.pr div{font-size:13px;overflow-wrap:anywhere}.sum{font-size:12px}.sum>div{min-width:0;overflow-wrap:anywhere}
 .jhs{cursor:pointer;color:#ffb3c7}.jhs b{color:#fff}.jhs i{color:#8f80bd;font-style:normal}
+html{overscroll-behavior-y:contain}
+.hrow{display:flex;align-items:center;gap:8px}.hrow h1{flex:1;min-width:0}
+#pref{flex:none;min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--glow);background:#3b1d7a;color:#fff;font-weight:700;font-size:14px}
+#pref:disabled{opacity:.65}
+#ptr{max-width:640px;margin:0 auto;overflow:hidden;height:0;text-align:center;color:#e9d5ff;font-size:12px;font-weight:700;line-height:28px}
+#appnote{color:#e9d5ff;font-size:12px;margin-top:4px;min-height:0}
+.upd.fail{color:#ffd0dc}.upd.fail b{color:var(--eye)}
 </style></head><body>
-<header><h1><img src="icon.svg" alt="">Gengar TCG Prices</h1><div class="upd" id="upd">Loading…</div>
-</header>
-<main id="m"><div class="empty">Loading… 👻</div></main>
+<header><div class="hrow"><h1><img src="icon.svg" alt="">Gengar TCG Prices</h1><button type="button" id="pref" title="Download the latest prices. Opening the app does not do this.">Refresh</button></div><div class="upd" id="upd">Opening…</div><div id="appnote"></div></header>
+<div id="ptr"></div>
+<main id="m"><div class="empty">Opening… 👻</div></main>
 <div id="ov"></div>
 <input type="file" id="imp" accept="application/json" hidden>
 <script>window.onerror=function(m){var e=document.getElementById('m');if(e)e.innerHTML='<div class="empty">👻 App error: '+String(m).replace(/</g,'&lt;')+'<br><button class="addb" onclick="(async()=>{try{for(const r of await navigator.serviceWorker.getRegistrations())await r.unregister();for(const k of await caches.keys())await caches.delete(k)}catch(x){}location.replace(location.pathname+\'?r=\'+Date.now())})()">Reset app cache &amp; reload</button></div>'};
 setTimeout(function(){if(!window.__boot)window.onerror('app.js did not load')},8000)</script>
-<script src="app.js?v=9"></script></body></html>
+<script src="app.js?v=10"></script></body></html>

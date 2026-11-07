@@ -1,20 +1,94 @@
-const V='tcg-v9b';
-const SHELL=['./','index.html','app.js','manifest.webmanifest','icon.svg','icon-180.png','icon-192.png','icon-512.png','prices.json','rates.json'];
-// Never hand Safari a redirected response for a navigation (it shows a blank page)
+const SHELL_CACHE='tcg-shell-v10';
+const IMAGE_CACHE='tcg-images-v1';
+const DATA_CACHE='tcg-data-v1';
+const SHELL=['./','./index.html','./app.js','./app.js?v=10','./manifest.webmanifest','./icon.svg','./icon-180.png','./icon-192.png','./icon-512.png'];
+// Never hand Safari a redirected response for a navigation (it shows a blank page).
 const clean=async r=>r&&r.redirected?new Response(await r.blob(),{status:r.status,statusText:r.statusText,headers:r.headers}):r;
-async function precache(){const c=await caches.open(V);
-  await Promise.all(SHELL.map(u=>fetch(u,{cache:'reload'}).then(clean).then(r=>r&&r.ok&&c.put(u,r)).catch(()=>{}))); // one missing file never fails install
-  try{const d=await (await caches.match('prices.json')).json();
-    await Promise.all(d.cards.flatMap(x=>[x.image,x.history]).filter(Boolean).map(u=>c.add(u).catch(()=>{})))}catch(e){}}
-self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(precache())});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+const keep=k=>k===SHELL_CACHE||k===IMAGE_CACHE||k===DATA_CACHE;
+
+async function precacheShell(){
+  const c=await caches.open(SHELL_CACHE);
+  for(const u of SHELL){
+    try{const r=await clean(await fetch(u,{cache:'reload'}));if(r&&r.ok)await c.put(u,r.clone())}catch(e){}
+  }
+  const html=await c.match('./')||await c.match('./index.html');
+  const js=await c.match('./app.js?v=10')||await c.match('./app.js');
+  return !!(html&&js);
+}
+function bare(req){const u=new URL(req.url);return new Request(u.origin+u.pathname)}
+async function migrate(){
+  const data=await caches.open(DATA_CACHE),images=await caches.open(IMAGE_CACHE);
+  for(const k of await caches.keys()){
+    if(keep(k))continue;
+    const c=await caches.open(k);
+    for(const req of await c.keys()){
+      const res=await c.match(req);if(!res)continue;
+      const path=new URL(req.url).pathname, dest=bare(req);
+      if(/\/(?:prices|rates)\.json$/.test(path)||/\/history\/[^/]+\.json$/.test(path)){
+        if(!(await data.match(dest,{ignoreSearch:true})))await data.put(dest,res.clone());
+      }else if(/\/img\/.+\.(?:jpg|jpeg|png|webp)$/i.test(path)){
+        if(!(await images.match(dest,{ignoreSearch:true})))await images.put(dest,res.clone());
+      }
+    }
+  }
+}
+self.addEventListener('install',e=>{
+  e.waitUntil((async()=>{if(!(await precacheShell()))throw new Error('shell incomplete');await self.skipWaiting()})());
+});
+self.addEventListener('activate',e=>{
+  e.waitUntil((async()=>{
+    await migrate();
+    const keys=await caches.keys();
+    await Promise.all(keys.filter(k=>!keep(k)).map(k=>caches.delete(k)));
+    await self.clients.claim();
+  })());
+});
+async function shellHtml(){
+  const c=await caches.open(SHELL_CACHE);
+  return (await c.match('./'))||(await c.match('./index.html'))||(await c.match('index.html'))
+}
 self.addEventListener('fetch',e=>{
-  const req=e.request,u=new URL(req.url); if(req.method!=='GET'||u.origin!==location.origin) return;
-  if(/(icon-[0-9]+\.png|icon\.svg|manifest\.webmanifest)$/.test(u.pathname)) return; // let iOS fetch icons/manifest straight from the network
-  if(req.mode==='navigate'){ // network (plain request, no init: iOS standalone dislikes rebuilt navigate requests), else cached shell
-    e.respondWith((async()=>{try{const r=await clean(await fetch(req));if(r.ok){caches.open(V).then(c=>c.put('./',r.clone()))}return r}
-      catch(_){return (await caches.match('./'))||(await caches.match('index.html'))||new Response('<meta name=viewport content="width=device-width"><body style="background:#0d0820;color:#eee;font:16px system-ui;padding:40px">Offline and app not cached yet. Connect and reopen.</body>',{headers:{'Content-Type':'text/html'}})}})());return}
-  if(/\.(js|json|webmanifest)$/.test(u.pathname)){
-    e.respondWith(fetch(req,{cache:'no-store'}).then(r=>{if(r.ok){const c=r.clone();caches.open(V).then(x=>x.put(req,c))}return r}).catch(async()=>(await caches.match(req,{ignoreSearch:true}))||Response.error()));return}
-  e.respondWith(caches.match(req,{ignoreSearch:true}).then(r=>r||fetch(req).then(n=>{if(n.ok){const c=n.clone();caches.open(V).then(x=>x.put(req,c))}return n})));
+  const req=e.request;if(req.method!=='GET')return;
+  const u=new URL(req.url);if(u.origin!==location.origin)return;
+  // Manual refresh (prices, rates, pictures, charts). Never used on open.
+  if(req.headers.get('x-tcg-refresh')==='1'){e.respondWith(fetch(req).catch(()=>Response.error()));return}
+  // iOS standalone can blank the page if the SW answers icon/manifest requests.
+  if(/(?:icon-[0-9]+\.png|manifest\.webmanifest)$/.test(u.pathname))return;
+  if(req.mode==='navigate'){
+    e.respondWith((async()=>{
+      const hit=await shellHtml();if(hit)return hit;
+      try{const r=await clean(await fetch(req));
+        if(r&&r.ok){const c=await caches.open(SHELL_CACHE);await c.put('./',r.clone());await c.put('./index.html',r.clone())}
+        return r;
+      }catch(_){return new Response('<!doctype html><meta name=viewport content="width=device-width"><title>Gengar TCG Prices</title><body style="background:#0d0820;color:#eee;font:16px system-ui;padding:40px">Offline, and this phone does not have the app saved yet. Connect once, then you can reopen it offline.</body>',{headers:{'Content-Type':'text/html;charset=utf-8'}})}})());
+    return;
+  }
+  if(/\/(?:prices|rates)\.json$/.test(u.pathname)||/\/history\/[^/]+\.json$/.test(u.pathname)){
+    e.respondWith((async()=>{
+      const hit=await caches.match(req,{ignoreSearch:true});
+      if(hit)return hit;
+      return new Response(JSON.stringify({offline:true}),{status:504,headers:{'Content-Type':'application/json'}});
+    })());
+    return;
+  }
+  if(/\.js$/.test(u.pathname)){
+    e.respondWith((async()=>{
+      const c=await caches.open(SHELL_CACHE);
+      const hit=await c.match('./app.js?v=10')||await c.match(req,{ignoreSearch:true})||await c.match('./app.js');
+      if(hit)return hit;
+      const r=await clean(await fetch(req));
+      if(r&&r.ok)await c.put('./app.js?v=10',r.clone());
+      return r;
+    })());
+    return;
+  }
+  if(/\/img\/.+\.(?:jpg|jpeg|png|webp)$/i.test(u.pathname)||/icon\.svg$/.test(u.pathname)){
+    e.respondWith((async()=>{
+      const c=await caches.open(IMAGE_CACHE);
+      const hit=await c.match(req,{ignoreSearch:true});
+      if(hit)return hit;
+      try{const r=await clean(await fetch(req));if(r&&r.ok)await c.put(bare(req),r.clone());return r}
+      catch(_){return Response.error()}
+    })());
+  }
 });
